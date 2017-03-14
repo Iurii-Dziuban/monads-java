@@ -1,2 +1,4 @@
 # monads-java
-Popular functional Monads implementations in Java
+Popular functional Monad implementations in Java
+
+#TODO
