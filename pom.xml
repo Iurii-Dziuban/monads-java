@@ -8,7 +8,29 @@
     <artifactId>monads-java</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>A custom project using monads</name>
+
+    <name>monads-java</name>
+    <url>https://github.com/Iurii-Dziuban/monads-java</url>
+
+    <scm>
+        <connection>scm:git:https://github.com/Iurii-Dziuban/monads-java.git</connection>
+        <developerConnection>scm:git:git@github.com:Iurii-Dziuban/monads-java.git</developerConnection>
+        <url>https://github.com/Iurii-Dziuban/monads-java</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <ciManagement>
+        <url>https://travis-ci.org/Iurii-Dziuban/monads-java</url>
+        <system>Travis</system>
+    </ciManagement>
+
+    <developers>
+        <developer>
+            <id>iurii.dziuban</id>
+            <name>Iurii Dziuban</name>
+            <email>ydzyuban@gmail.com</email>
+        </developer>
+    </developers>
 
     <!-- Project dependencies -->
     <dependencies>
@@ -40,6 +62,26 @@
                 <configuration>
                     <argLine>${argLine}</argLine>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.9</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
@@ -75,7 +117,7 @@
             <plugin>
                 <groupId>com.versioneye</groupId>
                 <artifactId>versioneye-maven-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>3.11.2</version>
             </plugin>
         </plugins>
     </build>
@@ -120,6 +162,5 @@
             <url>https://api.bintray.com/maven/iurii-dziuban/public/monads-java</url>
         </repository>
     </distributionManagement>
-
 
 </project>
