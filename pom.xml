@@ -11,6 +11,10 @@
 
     <name>monads-java</name>
     <url>https://github.com/Iurii-Dziuban/monads-java</url>
+         
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <scm>
         <connection>scm:git:https://github.com/Iurii-Dziuban/monads-java.git</connection>
@@ -111,7 +115,7 @@
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>4.3.0</version>
                 <configuration>
-                    <repoToken>NOcEtJIbmrdfTL2VGSaTXjOZVJGCV5r8E</repoToken>
+                    <repoToken>9jESuQN0Qwb8YiTDNDm0373zGEKQG91bU</repoToken>
                 </configuration>
             </plugin>
             <plugin>
