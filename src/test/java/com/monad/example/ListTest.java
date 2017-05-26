@@ -15,8 +15,11 @@ public class ListTest {
                         .map((x) -> x + 20)
                         .map((x) -> x * 2)
                         .flatMap((x) -> {
-                            if (x != 42) return List.nil();
-                            else return List.cons(x, List.nil());
+                            if (x != 42) {
+                                return List.nil();
+                            } else {
+                                return List.cons(x, List.nil());
+                            }
                         })
         ); // cons(42, cons(42, nil))
     }

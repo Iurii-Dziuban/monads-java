@@ -71,6 +71,11 @@ public class Optional<T> implements Monad<T> {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hashCode(value);
+    }
+
+    @Override
     public String toString() {
         return value != null
                 ? String.format("Optional[%s]", value)

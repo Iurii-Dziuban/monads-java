@@ -12,8 +12,9 @@ public class Reader<E,A> implements Monad<A> {
     private Function<E,A> f;
 
     public static <E,A> Reader<E,A> reader(final Function<E,A> f){
-        if(f == null)
+        if (f == null) {
             throw new IllegalArgumentException("argument has no value");
+        }
         return new Reader<E,A>(f);
     }
 

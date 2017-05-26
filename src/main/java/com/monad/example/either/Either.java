@@ -60,6 +60,11 @@ public class Either<T1, T2> implements Monad<T1> {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hashCode(left) + Objects.hashCode(right);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -72,6 +77,8 @@ public class Either<T1, T2> implements Monad<T1> {
         Either<?, ?> other = (Either<?, ?>) obj;
         return Objects.equals(left, other.left) && Objects.equals(right, other.right);
     }
+
+
 
     @Override
     public String toString() {

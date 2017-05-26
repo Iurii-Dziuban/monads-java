@@ -2,7 +2,6 @@ package com.monad.example.state;
 
 import com.monad.example.utilities.Tuple;
 
-import java.util.List;
 import java.util.function.Function;
 
 /**

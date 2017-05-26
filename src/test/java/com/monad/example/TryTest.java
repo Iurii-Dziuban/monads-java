@@ -4,9 +4,7 @@ import com.monad.example.optional.Optional;
 import com.monad.example.trie.Try;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by iurii.dziuban on 02.01.2017.
@@ -16,13 +14,13 @@ public class TryTest {
     @Test
     public void itShouldBeSuccessOnSuccess() throws Throwable{
         Try<String> t = Try.of(() -> "hey");
-        assertTrue(t.isSuccess());
+        assertThat(t.isSuccess()).isTrue();
     }
 
     @Test
     public void itShouldHoldValueOnSuccess() throws Throwable{
         Try<String> t = Try.of(() -> "hey");
-        assertEquals("hey", t.get());
+        assertThat(t.get()).isEqualTo("hey");
     }
 
     @Test
@@ -30,7 +28,7 @@ public class TryTest {
         Try<String> t = Try.of(() -> "hey");
         Try<Integer> intT = t.map((x) -> 5);
         intT.get();
-        assertEquals(5, intT.get().intValue());
+        assertThat(intT.get().intValue()).isEqualTo(5);
     }
 
     @Test
@@ -38,19 +36,19 @@ public class TryTest {
         Try<String> t = Try.of(() -> "hey");
         Try<Integer> intT = t.flatMap((x) -> Try.of(() -> 5));
         intT.get();
-        assertEquals(5, intT.get().intValue());
+        assertThat(intT.get().intValue()).isEqualTo(5);
     }
 
     @Test
     public void itShouldOrElseOnSuccess() {
         String t = Try.of(() -> "hey").orElse("jude");
-        assertEquals("hey", t);
+        assertThat(t).isEqualTo("hey");
     }
 
     @Test
     public void itShouldReturnValueWhenRecoveringOnSuccess() {
         String t = Try.of(() -> "hey").recover((e) -> "jude");
-        assertEquals("hey", t);
+        assertThat(t).isEqualTo("hey");
     }
 
 
@@ -60,14 +58,14 @@ public class TryTest {
                 .recoverWith((x) ->
                         Try.of(() -> "Jude")
                 ).get();
-        assertEquals("hey", t);
+        assertThat(t).isEqualTo("hey");
     }
 
     @Test
     public void itShouldOrElseTryOnSuccess() throws Throwable {
         Try<String> t = Try.of(() -> "hey").orElseTry(() -> "jude");
 
-        assertEquals("hey", t.get());
+        assertThat(t.get()).isEqualTo("hey");
     }
 
     @Test
@@ -75,7 +73,7 @@ public class TryTest {
         Try<String> t = Try.of(() -> {
             throw new RuntimeException("e");
         });
-        assertFalse(t.isSuccess());
+        assertThat(t.isSuccess()).isFalse();
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -92,7 +90,7 @@ public class TryTest {
             throw new RuntimeException("e");
         }).map((x) -> "hey" + x);
 
-        assertFalse(t.isSuccess());
+        assertThat(t.isSuccess()).isFalse();
     }
 
     @Test
@@ -101,7 +99,7 @@ public class TryTest {
             throw new RuntimeException("e");
         }).flatMap((x) -> Try.of(() -> "hey"));
 
-        assertFalse(t.isSuccess());
+        assertThat(t.isSuccess()).isFalse();
     }
 
     @Test
@@ -110,7 +108,7 @@ public class TryTest {
             throw new IllegalArgumentException("e");
         }).orElse("jude");
 
-        assertEquals("jude", t);
+        assertThat(t).isEqualTo("jude");
     }
 
     @Test
@@ -119,7 +117,7 @@ public class TryTest {
             throw new IllegalArgumentException("e");
         }).orElseTry(() -> "jude");
 
-        assertEquals("jude", t.get());
+        assertThat(t.get()).isEqualTo("jude");
     }
 
     @Test
@@ -129,7 +127,7 @@ public class TryTest {
                     throw new RuntimeException("fail");
                 })
                 .recover((e) -> "jude");
-        assertEquals("jude", t);
+        assertThat(t).isEqualTo("jude");
     }
 
 
@@ -141,7 +139,7 @@ public class TryTest {
                 .recoverWith((x) ->
                         Try.of(() -> "Jude")
                 ).get();
-        assertEquals("Jude", t);
+        assertThat(t).isEqualTo("Jude");
     }
 
     @Test
@@ -159,8 +157,8 @@ public class TryTest {
             throw new RuntimeException();
         }).filter(o -> true);
 
-        assertEquals(t1.isSuccess(), false);
-        assertEquals(t2.isSuccess(), false);
+        assertThat(t1.isSuccess()).isFalse();
+        assertThat(t2.isSuccess()).isFalse();
     }
 
     @Test
@@ -168,8 +166,8 @@ public class TryTest {
         Try t1 = Try.<String>of(() -> "yo mama").filter(s -> s.length() > 0);
         Try t2 = Try.<String>of(() -> "yo mama").filter(s -> s.length() < 0);
 
-        assertEquals(t1.isSuccess(), true);
-        assertEquals(t2.isSuccess(), false);
+        assertThat(t1.isSuccess()).isTrue();
+        assertThat(t2.isSuccess()).isFalse();
     }
 
     @Test
@@ -179,15 +177,15 @@ public class TryTest {
         }).toOptional();
         Optional<String> opt2 = Try.<String>of(() -> null).toOptional();
 
-        assertFalse(opt1.isPresent());
-        assertFalse(opt2.isPresent());
+        assertThat(opt1.isPresent()).isFalse();
+        assertThat(opt2.isPresent()).isFalse();
     }
 
     @Test
     public void isShouldReturnTryValueWrappedInOptionalIfNonNullSuccess() throws Throwable {
         Optional<String> opt1 = Try.<String>of(() -> "yo mama").toOptional();
 
-        assertTrue(opt1.isPresent());
+        assertThat(opt1.isPresent()).isTrue();
     }
 
     @Test(expected = IllegalArgumentException.class)

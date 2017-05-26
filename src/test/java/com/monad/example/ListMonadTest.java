@@ -15,8 +15,11 @@ public class ListMonadTest {
                         .map((x) -> x + 20)
                         .map((x) -> x * 2)
                         .flatMap((x) -> {
-                            if (x != 42) return new ListMonad<Integer>(java.util.Arrays.asList());
-                            else return new ListMonad<Integer>(java.util.Arrays.asList(x));
+                            if (x != 42) {
+                                return new ListMonad<Integer>(java.util.Arrays.asList());
+                            } else {
+                                return new ListMonad<Integer>(java.util.Arrays.asList(x));
+                            }
                         })
         ); // [42, 42]
     }

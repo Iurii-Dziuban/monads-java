@@ -1,7 +1,5 @@
 package com.monad.example.utilities;
 
-import com.monad.example.either.Either;
-
 import java.util.Objects;
 
 /**
@@ -13,10 +11,12 @@ public class Tuple<A,B> {
     private final B b;
 
     public static <A,B> Tuple<A,B> tuple(final A a, final B b){
-        if(a == null)
+        if (a == null) {
             throw new IllegalArgumentException("first argument has no value");
-        if(b == null)
+        }
+        if (b == null) {
             throw new IllegalArgumentException("second argument has no value");
+        }
         return new Tuple(a,b);
     }
 
@@ -53,6 +53,11 @@ public class Tuple<A,B> {
 
         Tuple<?, ?> other = (Tuple<?, ?>) obj;
         return Objects.equals(a, other.a) && Objects.equals(b, other.b);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(a) + Objects.hashCode(b);
     }
 
     @Override

@@ -12,7 +12,7 @@ import java.util.function.Function;
  */
 public class Promise<V> implements Monad<V> {
 
-    private Throwable exception = null;
+    //private Throwable exception = null;
 
     private boolean invoked = false;
 
@@ -69,7 +69,7 @@ public class Promise<V> implements Monad<V> {
         if (!invoked) {
             invoked = true;
             this.result = result;
-            this.exception = t;
+            //this.exception = t;
         } else {
             return;
         }

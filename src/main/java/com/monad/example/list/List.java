@@ -17,17 +17,29 @@ public class List<A> implements Monad<A> {
         t = _t;
     }
 
-    public <B> List<B> map(Function<A,B> f) {
-        if (h == null) return nil();
-        else if (t == null) return of(f.apply(h), null);
-        else return of(f.apply(h), t.map(f));
+    public <B> List<B> map(Function<A, B> f) {
+        if (h == null) {
+            return nil();
+        } else {
+            if (t == null) {
+                return of(f.apply(h), null);
+            } else {
+                return of(f.apply(h), t.map(f));
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")
-    public <B> List<B> flatMap(Function<A,List<B>> f) {
-        if (h == null) return nil();
-        else if (t == null) return f.apply(h);
-        else return concat(f.apply(h), t.flatMap(f));
+    public <B> List<B> flatMap(Function<A, List<B>> f) {
+        if (h == null) {
+            return nil();
+        } else {
+            if (t == null) {
+                return f.apply(h);
+            } else {
+                return concat(f.apply(h), t.flatMap(f));
+            }
+        }
     }
 
     // concat
@@ -40,9 +52,13 @@ public class List<A> implements Monad<A> {
     }
 
     public String toString() {
-        if (h == null) return "nil";
-        else if (t == null) return "cons(" + h.toString() + ", nil)";
-        else return "cons(" + h.toString() + ", " + t.toString() + ")";
+        if (h == null) {
+            return "nil";
+        } else if (t == null) {
+            return "cons(" + h.toString() + ", nil)";
+        } else {
+            return "cons(" + h.toString() + ", " + t.toString() + ")";
+        }
     }
 
     // constructors
@@ -61,9 +77,13 @@ public class List<A> implements Monad<A> {
 
     @Override
     public <R> List<R> bind(Function<? super A, ? extends Monad<R>> f) {
-        if (h == null) return nil();
-        else if (t == null) return (List<R>)f.apply(h);
-        else return concat((List<R>)f.apply(h), t.flatMap((Function<A, List<R>>) f));
+        if (h == null) {
+            return nil();
+        } else if (t == null) {
+            return (List<R>) f.apply(h);
+        } else {
+            return concat((List<R>) f.apply(h), t.flatMap((Function<A, List<R>>) f));
+        }
     }
 
     public static <A> List<A> cons(A h, List<A> t) {

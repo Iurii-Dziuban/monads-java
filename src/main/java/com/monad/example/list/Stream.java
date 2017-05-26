@@ -26,9 +26,10 @@ public class Stream<V> implements Monad<V> {
 
     @Override
     public <R> Stream<R> bind(Function<? super V, ? extends Monad<R>> f) {
+        Stream<R> newValue = null;
         for (V v : elements) {
-            Stream<R> newValue = (Stream<R>) f.apply(v);
+            newValue = (Stream<R>) f.apply(v);
         }
-        return null;
+        return newValue;
     }
 }

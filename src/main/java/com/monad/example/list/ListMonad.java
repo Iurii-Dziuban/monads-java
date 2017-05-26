@@ -17,7 +17,7 @@ public class ListMonad<A> implements Monad<A> {
     }
 
     public <B> ListMonad<B> map(Function<A,B> f) {
-        java.util.List<B> bs = new java.util.ArrayList<B>();
+        java.util.List<B> bs = new ArrayList<B>();
         for (A a : l) {
             bs.add(f.apply(a));
         }
@@ -45,7 +45,7 @@ public class ListMonad<A> implements Monad<A> {
 
     @Override
     public <R> ListMonad<R> bind(Function<? super A, ? extends Monad<R>> f) {
-        java.util.List<R> bs = new java.util.ArrayList<R>();
+        java.util.List<R> bs = new ArrayList<R>();
         for (A a : l) {
             bs.addAll(((ListMonad<R>)f.apply(a)).l);
         }

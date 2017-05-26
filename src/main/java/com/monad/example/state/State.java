@@ -15,14 +15,16 @@ public class State<S,A> implements Monad<A> {
     private Function<S,Tuple<A,S>> f;
 
     public static <S,A> State<S,A> state(final Function<S,Tuple<A,S>> f){
-        if(f == null)
+        if(f == null) {
             throw new IllegalArgumentException("argument has no value");
+        }
         return new State<S,A>(f);
     }
 
     public static <S,A> State<S,A> state(final A a){
-        if(a == null)
+        if(a == null) {
             throw new IllegalArgumentException("argument has no value");
+        }
         return new State<S,A>(new Function<S,Tuple<A,S>>(){
             public Tuple<A,S> apply(final S s){
                 return Tuple.tuple(a,s);

@@ -9,6 +9,7 @@ import com.monad.example.utilities.Unit;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.function.Function;
 
 /**
@@ -79,7 +80,7 @@ class ConsoleIO {
         }
     };
 
-    final static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+    final static BufferedReader in = new BufferedReader(new InputStreamReader(System.in, Charset.forName("UTF-8")));
 
     static IO<String> getLine = new IO<String>() {
         @Override
