@@ -7,6 +7,13 @@ Popular functional Monad implementations in Java
 [![Dependency Status](https://www.versioneye.com/user/projects/58e33dc626a5bb0038e421ee/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58e33dc626a5bb0038e421ee)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/Iurii-Dziuban/monads-java/issues)
 
+## Table of contents:
+ * [Static Analysis QA Checks](#checks)
+ * [Project parts](#project-parts)
+
 # Checks
 
 Jacoco code coverage, pmd, checkstyle, enforcer, findbugs
+
+# Project parts
+TODO
