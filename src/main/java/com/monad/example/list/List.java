@@ -5,6 +5,8 @@ import com.monad.example.Monad;
 import java.util.function.Function;
 
 /**
+ * Head - Tail List Monad implementation
+ *
  * Created by iurii.dziuban on 10.01.2017.
  */
 public class List<A> implements Monad<A> {

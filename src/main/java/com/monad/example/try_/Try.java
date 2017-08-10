@@ -1,4 +1,4 @@
-package com.monad.example.trie;
+package com.monad.example.try_;
 
 import com.monad.example.Monad;
 import com.monad.example.optional.Optional;
@@ -32,6 +32,12 @@ public interface Try<U> extends Monad<U> {
     }
 
     // world of monad
+
+    @Override
+    Try<U> pure(U u);
+
+    @Override
+    <R> Try<R> bind(Function<? super U, ? extends Monad<R>> f);
 
     <T> Try<T> map(Function<? super U, ? extends T> f);
 

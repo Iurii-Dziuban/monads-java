@@ -1,8 +1,13 @@
 package com.monad.example;
 
 import com.monad.example.optional.Optional;
-import com.monad.example.trie.Try;
+import com.monad.example.try_.Try;
 import org.junit.Test;
+import org.mockito.BDDMockito;
+
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -37,6 +42,13 @@ public class TryTest {
         Try<Integer> intT = t.flatMap((x) -> Try.of(() -> 5));
         intT.get();
         assertThat(intT.get().intValue()).isEqualTo(5);
+    }
+
+    @Test
+    public void flatMapOnSuccessThrowsException() throws Throwable {
+        Try<String> t = Try.of(() -> "hey");
+        Try<Integer> intT = t.flatMap((x) -> {throw new IllegalArgumentException();});
+        assertThat(intT.isSuccess()).isFalse();
     }
 
     @Test
@@ -226,5 +238,64 @@ public class TryTest {
         t.onFailure(s -> {
             throw new IllegalArgumentException("Should be thrown.");
         });
+    }
+
+    @Test
+    public void pureSuccess() throws Throwable{
+        Try<String> t = Try.successful("hey");
+        assertThat(t.pure("50").get()).isEqualTo("50");
+    }
+
+    @Test
+    public void pureFailure() throws Throwable{
+        Try<String> t = Try.failure(new IllegalArgumentException());
+        assertThat(t.pure("123").get()).isEqualTo("123");
+    }
+
+    @Test
+    public void failureIsNull() throws Throwable{
+        Try<String> t = Try.failure(null);
+        assertThat(t.get()).isNull();
+    }
+
+    @Test
+    public void onFailureTest() throws Throwable{
+        IllegalStateException e = new IllegalStateException();
+        Try<String> t = Try.failure(e);
+        Consumer<Throwable> throwableConsumer = BDDMockito.mock(Consumer.class);
+
+        t.onFailure(throwableConsumer);
+
+        BDDMockito.then(throwableConsumer).should().accept(e);
+    }
+
+    @Test
+    public void onSuccessTest() throws Throwable{
+        Try<String> t = Try.successful("5");
+        Consumer<String> consumer = BDDMockito.mock(Consumer.class);
+
+        t.onSuccess(consumer);
+
+        BDDMockito.then(consumer).should().accept("5");
+    }
+
+    @Test
+    public void orElseTryTest() throws Throwable{
+        IllegalStateException e = new IllegalStateException();
+        Try<String> t = Try.failure(e);
+        Supplier<String> supplier = BDDMockito.mock(Supplier.class);
+        BDDMockito.when(supplier.get()).thenThrow(e);
+
+        assertThat(t.orElseTry(supplier).isSuccess()).isFalse();
+    }
+
+    @Test
+    public void bindTest() throws Throwable{
+        Try<String> t = Try.successful("5");
+        Try<String> failure = Try.failure(new IllegalArgumentException());
+        assertThat(t.bind(string -> Try.successful("5")).isSuccess()).isTrue();
+        Function<String, Monad<String>> stringMonadFunction = string -> {throw new IllegalArgumentException();};
+        assertThat(t.bind(stringMonadFunction).isSuccess()).isFalse();
+        assertThat(failure.bind(string -> Try.successful("5")).isSuccess()).isFalse();
     }
 }

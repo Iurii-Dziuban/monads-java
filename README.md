@@ -1,5 +1,6 @@
 # monads-java
 Popular functional Monad implementations in Java
+
 [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badge/)    
 
 [![Build Status](https://travis-ci.org/Iurii-Dziuban/monads-java.svg?branch=master)](https://travis-ci.org/Iurii-Dziuban/monads-java)
@@ -16,4 +17,10 @@ Popular functional Monad implementations in Java
 Jacoco code coverage, pmd, checkstyle, enforcer, findbugs
 
 # Project parts
-TODO
+
+1) Either Monad `com.monad.example.either.Either` (`EitherTest`) 
+Monad that has either a value or an Exception. Tests include checks on Monad properties.
+2) Try Monad `com.monad.example.try_.Try` (`TryTest`)
+Monad that can be either a type `Success` or `Failure`, depending on operations
+3) ListMonad `com.monad.example.list.ListMonad` (`ListMonadTest`)
+Monad that used to construct Monadic Lists

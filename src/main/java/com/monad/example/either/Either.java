@@ -78,11 +78,9 @@ public class Either<T1, T2> implements Monad<T1> {
         return Objects.equals(left, other.left) && Objects.equals(right, other.right);
     }
 
-
-
     @Override
     public String toString() {
-        return left != null
+        return left.isPresent()
                 ? String.format("Either[left][%s]", left)
                 : String.format("Either[right][%s]", right);
     }
