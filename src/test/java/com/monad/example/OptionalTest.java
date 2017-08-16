@@ -49,4 +49,16 @@ public class OptionalTest {
                 .isEqualTo(Optional.of(5));
     }
 
+    @Test
+    public void testEqualsAndPure() {
+        Optional<Integer> pure = Optional.of(5).pure(6);
+
+        assertThat(pure.equals(new Object())).isFalse();
+        assertThat(pure.equals(pure)).isTrue();
+    }
+
+    @Test
+    public void testEmpty() {
+        assertThat(Optional.empty().bind(Optional::of)).isEqualTo(Optional.empty());
+    }
 }

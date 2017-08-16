@@ -4,6 +4,7 @@ import com.monad.example.list.ListMonad;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,9 +22,9 @@ public class ListMonadTest {
                         .map((x) -> x * 2)
                         .flatMap((x) -> {
                             if (x != 42) {
-                                return new ListMonad<Integer>(java.util.Arrays.asList());
+                                return new ListMonad<>(Collections.emptyList());
                             } else {
-                                return new ListMonad<Integer>(java.util.Arrays.asList(x));
+                                return new ListMonad<>(Collections.singletonList(x));
                             }
                         }).toString()
         ).isEqualTo("[42, 42]");

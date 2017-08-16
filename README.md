@@ -1,4 +1,5 @@
 # monads-java
+
 Popular functional Monad implementations in Java
 
 [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badge/)    
@@ -22,5 +23,15 @@ Jacoco code coverage, pmd, checkstyle, enforcer, findbugs
 Monad that has either a value or an Exception. Tests include checks on Monad properties.
 2) Try Monad `com.monad.example.try_.Try` (`TryTest`)
 Monad that can be either a type `Success` or `Failure`, depending on operations
-3) ListMonad `com.monad.example.list.ListMonad` (`ListMonadTest`)
-Monad that used to construct Monadic Lists
+3) ListMonad Monad `com.monad.example.list.ListMonad` (`ListMonadTest`)
+Monad that used to construct Monadic Lists based on ArrayList
+4) List Monad `com.monad.example.list.List` (`ListTest`)
+Monad based on head and tail recursive style List
+5) Optional Monad `com.monad.example.optional.Optional` (`OptionalTest`)
+Optional Monad - similar to java Optional implementation: element or null.
+6) Promise Monad `com.monad.example.promise.Promise` (`PromiseTest`)
+Not thread safe Promise Monad - ability to chain actions.
+7) Writer (Log) Monad `com.monad.example.writer.Log` (`LogTest`)
+Based on chaining and saving logs in the order we invoke functions.
+
+**TODO** State, Reader, Stream, IO Monads

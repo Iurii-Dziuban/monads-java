@@ -25,7 +25,7 @@ public class Optional<T> implements Monad<T> {
     }
 
     @Override
-    public Monad<T> pure(T t) {
+    public Optional<T> pure(T t) {
         return of(t);
     }
 

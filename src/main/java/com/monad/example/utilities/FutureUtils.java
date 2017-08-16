@@ -9,8 +9,6 @@ import java.util.stream.Collectors;
  */
 public class FutureUtils {
 
-    private FutureUtils() {}
-
     public static <T> CompletableFuture<List<T>> sequence(List<CompletableFuture<T>> futures) {
         return CompletableFuture.
                 allOf(futures.toArray(new CompletableFuture[futures.size()])).

@@ -19,6 +19,19 @@ public class List<A> implements Monad<A> {
         t = _t;
     }
 
+    // constructors
+    public static <A> List<A> of(A h, List<A> t) {
+        return new List<>(h, t);
+    }
+
+    public static <A> List<A> nil() {
+        return new List<>(null, null);
+    }
+
+    public static <A> List<A> cons(A h, List<A> t) {
+        return new List<>(h, t);
+    }
+
     public <B> List<B> map(Function<A, B> f) {
         if (h == null) {
             return nil();
@@ -49,7 +62,10 @@ public class List<A> implements Monad<A> {
         if (listStart.h == null) {
             return listEnd;
         } else {
-            return concat(listStart.t, listEnd);
+            if (listStart.t == null) {
+                return List.of(listStart.h, listEnd);
+            }
+            return List.of(listStart.h, concat(listStart.t, listEnd));
         }
     }
 
@@ -63,32 +79,28 @@ public class List<A> implements Monad<A> {
         }
     }
 
-    // constructors
-    public static <A> List<A> of(A h, List<A> t) {
-        return new List<A>(h, t);
-    }
-
-    public static <A> List<A> nil() {
-        return new List<A>(null, null);
-    }
-
     @Override
     public List<A> pure(A a) {
-        return of(a, null);
+        if (h == null) {
+            return of(a, null);
+        } else {
+            if (t == null) {
+                return of(h, of(a, nil()));
+            }
+        }
+        return of(h, t.pure(a));
     }
 
     @Override
     public <R> List<R> bind(Function<? super A, ? extends Monad<R>> f) {
         if (h == null) {
             return nil();
-        } else if (t == null) {
-            return (List<R>) f.apply(h);
         } else {
-            return concat((List<R>) f.apply(h), t.flatMap((Function<A, List<R>>) f));
+            if (t == null) {
+                return (List<R>) f.apply(h);
+            } else {
+                return concat((List<R>) f.apply(h), t.bind(f));
+            }
         }
-    }
-
-    public static <A> List<A> cons(A h, List<A> t) {
-        return new List<A>(h, t);
     }
 }

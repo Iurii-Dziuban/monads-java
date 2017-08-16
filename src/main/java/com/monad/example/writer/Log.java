@@ -3,7 +3,7 @@ package com.monad.example.writer;
 import com.monad.example.Monad;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
@@ -23,11 +23,11 @@ public class Log<T> implements Monad<T> {
     }
 
     public static <U> Log<U> trace(U value, String log) {
-        return new Log(value, Arrays.asList(log + ": " + value));
+        return new Log<>(value, Collections.singletonList(log + ": " + value));
     }
 
     public static <U> Log<U> of(U value) {
-        return new Log(value, new ArrayList<>());
+        return new Log<>(value, new ArrayList<>());
     }
 
     public <R> Log<R> flatMap(Function<T, Log<R>> mapper) {
@@ -36,7 +36,7 @@ public class Log<T> implements Monad<T> {
         List<String> newTrace =  new ArrayList<>(trace);
         newTrace.addAll(mapped.trace);
 
-        return new Log(mapped.value, newTrace);
+        return new Log<>(mapped.value, newTrace);
     }
 
     public T getValue() {
@@ -60,6 +60,6 @@ public class Log<T> implements Monad<T> {
         List<String> newTrace =  new ArrayList<>(trace);
         newTrace.addAll(mapped.trace);
 
-        return new Log(mapped.value, newTrace);
+        return new Log<>(mapped.value, newTrace);
     }
 }

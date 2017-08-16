@@ -12,8 +12,6 @@ import java.util.function.Function;
  */
 public class Promise<V> implements Monad<V> {
 
-    //private Throwable exception = null;
-
     private boolean invoked = false;
 
     private List<Consumer<Promise<V>>> callbacks = new ArrayList<>();
@@ -40,13 +38,8 @@ public class Promise<V> implements Monad<V> {
                 V v = callback.get();
                 Promise<R> applicationResult = (Promise<R>) f.apply(v);
                 applicationResult.onRedeem(applicationCallback -> {
-                    try {
                         R r = applicationCallback.get();
                         result.invoke(r);
-                    }
-                    catch (Throwable e) {
-                        result.invokeWithException(e);
-                    }
                 });
             }
             catch (Throwable e) {
@@ -69,7 +62,6 @@ public class Promise<V> implements Monad<V> {
         if (!invoked) {
             invoked = true;
             this.result = result;
-            //this.exception = t;
         } else {
             return;
         }
@@ -79,13 +71,11 @@ public class Promise<V> implements Monad<V> {
     }
 
     public void onRedeem(Consumer<Promise<V>> callback) {
-        synchronized (this) {
-            if (!invoked) {
-                callbacks.add(callback);
-            }
-        }
         if (invoked) {
             callback.accept(this);
+        } else {
+            // synchronization is needed
+            callbacks.add(callback);
         }
     }
 
