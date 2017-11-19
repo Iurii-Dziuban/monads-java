@@ -6,7 +6,7 @@ Popular functional Monad implementations in Java
 
 [![Build Status](https://travis-ci.org/Iurii-Dziuban/monads-java.svg?branch=master)](https://travis-ci.org/Iurii-Dziuban/monads-java)
 [![Coverage Status](https://coveralls.io/repos/github/Iurii-Dziuban/monads-java/badge.svg?branch=master)](https://coveralls.io/github/Iurii-Dziuban/monads-java?branch=master)
-[![Dependency Status](https://www.versioneye.com/user/projects/58e33dc626a5bb0038e421ee/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58e33dc626a5bb0038e421ee)
+[![Dependency Status](https://www.versioneye.com/user/projects/5a11b2930fb24f2a317170a9/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/5a11b2930fb24f2a317170a9)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/Iurii-Dziuban/monads-java/issues)
 
 ## Table of contents:
