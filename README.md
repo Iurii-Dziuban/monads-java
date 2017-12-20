@@ -1,4 +1,4 @@
-# monads-java
+# Monads Java
 
 Popular functional Monad implementations in Java
 
@@ -12,10 +12,11 @@ Popular functional Monad implementations in Java
 ## Table of contents:
  * [Static Analysis QA Checks](#checks)
  * [Project parts](#project-parts)
-
+ * [Ideas to try](#ideas)
+ 
 # Checks
 
-Jacoco code coverage, pmd, checkstyle, enforcer, findbugs
+`Jacoco`/`cobertura` code coverage, `pmd`, `checkstyle`, `enforcer`, `findbugs`
 
 # Project parts
 
@@ -34,4 +35,9 @@ Not thread safe Promise Monad - ability to chain actions.
 7) Writer (Log) Monad `com.monad.example.writer.Log` (`LogTest`)
 Based on chaining and saving logs in the order we invoke functions.
 
-**TODO** State, Reader, Stream, IO Monads
+# Ideas
+- State monad 
+- Reader monad 
+- Stream monad 
+- IO Monad
+- Monad in Haskel
