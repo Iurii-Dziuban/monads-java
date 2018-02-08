@@ -2,6 +2,8 @@
 
 Popular functional Monad implementations in Java
 
+Inspired by https://www.youtube.com/watch?v=nkUafcNWiQE
+
 [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badge/)    
 
 [![Build Status](https://travis-ci.org/Iurii-Dziuban/monads-java.svg?branch=master)](https://travis-ci.org/Iurii-Dziuban/monads-java)
