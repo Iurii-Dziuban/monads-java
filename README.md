@@ -3,6 +3,7 @@
 Popular functional Monad implementations in Java
 
 Inspired by https://www.youtube.com/watch?v=nkUafcNWiQE
+http://blog.ploeh.dk/2017/10/05/monoids-semigroups-and-friends/
 
 [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badge/)    
 
